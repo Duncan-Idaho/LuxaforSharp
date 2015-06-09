@@ -50,6 +50,11 @@
     <Compile Include="Commands\JumpToCommand.cs" />
     <Compile Include="Commands\PatternCommand.cs" />
     <Compile Include="Commands\WaveCommand.cs" />
+    <Compile Include="BaseDevice.cs" />
+    <Compile Include="EnumeratorExtensions.cs" />
+    <Compile Include="IDeviceList.cs" />
+    <Compile Include="DeviceList.cs" />
+    <Compile Include="AllDevices.cs" />
     <Compile Include="Device.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="IDevice.cs" />
