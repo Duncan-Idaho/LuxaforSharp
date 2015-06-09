@@ -8,7 +8,7 @@ using LuxaforSharp.Commands;
 
 namespace LuxaforSharp
 {
-    public class AllDevices : BaseDevice, IDeviceList
+    public class AllDevices : BaseDevice, IEnumerable<IDevice>
     {
         public const int VendorId = 0x04D8;
         public const int ProductId = 0xF372;
@@ -19,24 +19,15 @@ namespace LuxaforSharp
         public AllDevices(IDeviceList deviceList)
         {
             this.deviceList = deviceList;
+
+            this.deviceList.LostDevice += DeviceListLostDevice;
         }
 
-        public IDeviceList Scan()
+        private void DeviceListLostDevice(object sender, DeviceEventArguments e)
         {
-            lock (this.lockObject)
-            {
-                var oldDevices = this.deviceList.ToList();
-                var newDevices = this.deviceList.Scan();
-
-                foreach (var device in oldDevices.Except(newDevices))
-                {
-                    device.Dispose();
-                }
-
-                return this.deviceList;
-            }
+            e.Device.Dispose();
         }
-
+    
         public override void Dispose()
         {
             foreach (var device in deviceList)

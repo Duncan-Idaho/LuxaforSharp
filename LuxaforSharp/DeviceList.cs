@@ -17,6 +17,26 @@ namespace LuxaforSharp
         private IList<Device> devices = new List<Device>();
         private object lockObject = new object();
 
+        public event EventHandler<DeviceEventArguments> DiscoveredDevice;
+
+        protected virtual void OnDiscoveredDevice(object sender, DeviceEventArguments arguments)
+        {
+            if (DiscoveredDevice != null)
+            {
+                DiscoveredDevice(sender, arguments);
+            }
+        }
+
+        public event EventHandler<DeviceEventArguments> LostDevice;
+
+        protected virtual void OnLostDevice(object sender, DeviceEventArguments arguments)
+        {
+            if (LostDevice != null)
+            {
+                LostDevice(sender, arguments);
+            }
+        }
+
         public DeviceList(IHidEnumerator hidEnumerator)
         {
             this.hidEnumerator = hidEnumerator;
@@ -34,13 +54,24 @@ namespace LuxaforSharp
 
                 var results = this.devices.Differences(currentHidDevices, (device, hidDevice) => device.DevicePath == hidDevice.DevicePath);
 
-                var stillPresentDevices = results.Item2;
-                var newDevices = results.Item3.Select(underlyingDevice => new Device(underlyingDevice));
+                var lostDevices = results.Item1.ToList();
+                var stillPresentDevices = results.Item2.ToList();
+                var newDevices = results.Item3.Select(underlyingDevice => new Device(underlyingDevice)).ToList();
 
                 this.devices = stillPresentDevices.Concat(newDevices).ToList();
 
+                foreach (var device in lostDevices)
+                {
+                    this.OnLostDevice(this, new DeviceEventArguments(device));
+                }
+
+                foreach (var device in newDevices)
+                {
+                    this.OnDiscoveredDevice(this, new DeviceEventArguments(device));
+                }
+
                 return this;
-            }       
+            }
         }
 
         public IEnumerator<IDevice> GetEnumerator()

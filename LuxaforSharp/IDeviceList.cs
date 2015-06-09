@@ -11,5 +11,8 @@ namespace LuxaforSharp
     public interface IDeviceList : IEnumerable<IDevice>
     {
         IDeviceList Scan();
+
+        event EventHandler<DeviceEventArguments> DiscoveredDevice;
+        event EventHandler<DeviceEventArguments> LostDevice;
     }
 }
