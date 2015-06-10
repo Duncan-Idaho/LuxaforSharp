@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace LuxaforSharp
 {
-    public static class EnumeratorExtensions
+    internal static class EnumeratorExtensions
     {
-        public static Tuple<IEnumerable<T1>, IEnumerable<T1>, IEnumerable<T2>> Differences<T1, T2>(
+        internal static Tuple<IEnumerable<T1>, IEnumerable<T1>, IEnumerable<T2>> Differences<T1, T2>(
             this IEnumerable<T1> source1, IEnumerable<T2> source2, Func<T1, T2, bool> matchingCondition)
         {
             var newItems = source2.Where(item2 => !source1.Any(item1 => matchingCondition(item1, item2)));

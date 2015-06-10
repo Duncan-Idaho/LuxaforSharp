@@ -17,6 +17,9 @@ namespace LuxaforSharp
         private IList<Device> devices = new List<Device>();
         private object lockObject = new object();
 
+        /// <summary>
+        /// Raised when, during a Scan operation, a device is detected while it was not during last scan
+        /// </summary>
         public event EventHandler<DeviceEventArguments> DiscoveredDevice;
 
         protected virtual void OnDiscoveredDevice(object sender, DeviceEventArguments arguments)
@@ -27,6 +30,9 @@ namespace LuxaforSharp
             }
         }
 
+        /// <summary>
+        /// Raised when, during a Scan operation, a device is lost while it was present during last scan
+        /// </summary>
         public event EventHandler<DeviceEventArguments> LostDevice;
 
         protected virtual void OnLostDevice(object sender, DeviceEventArguments arguments)
@@ -46,7 +52,7 @@ namespace LuxaforSharp
             this(new HidEnumerator())
         { }
 
-        public IDeviceList Scan()
+        public void Scan()
         {
             lock (lockObject)
             {
@@ -69,8 +75,6 @@ namespace LuxaforSharp
                 {
                     this.OnDiscoveredDevice(this, new DeviceEventArguments(device));
                 }
-
-                return this;
             }
         }
 
