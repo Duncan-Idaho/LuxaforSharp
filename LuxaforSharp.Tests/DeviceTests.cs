@@ -3,30 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LuxaforSharp;
 using LuxaforSharp.Commands;
+using Xunit;
 
 namespace LuxaforSharp.Tests
 {
-    [TestClass]
     public class DeviceTests
     {
-        [TestMethod]
+        [Fact]
         public void Dispose_ActuallyDisposeUnderlyingDevice()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
-            Assert.IsFalse(fakeUnderlyingDevice.IsDisposed);
+            Assert.False(fakeUnderlyingDevice.IsDisposed);
 
             using (var device = new Device(fakeUnderlyingDevice))
             {
-                Assert.IsFalse(fakeUnderlyingDevice.IsDisposed);
+                Assert.False(fakeUnderlyingDevice.IsDisposed);
             }
 
-            Assert.IsTrue(fakeUnderlyingDevice.IsDisposed);
+            Assert.True(fakeUnderlyingDevice.IsDisposed);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetColor_ToEveryLed_WithoutFade_UsesSimpleMode()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
@@ -40,7 +39,7 @@ namespace LuxaforSharp.Tests
             fakeUnderlyingDevice.AssertMessagesReceived("00:01:FF:C8:14:2A:00:00:00");
         }
 
-        [TestMethod]
+        [Fact]
         public void SetColor_ToSingleSide_WithoutFade_UsesSimpleMode()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
@@ -54,7 +53,7 @@ namespace LuxaforSharp.Tests
             fakeUnderlyingDevice.AssertMessagesReceived("00:01:42:C8:14:2A:00:00:00");
         }
 
-        [TestMethod]
+        [Fact]
         public void SetColor_ToSingleLed_WithoutFade_UsesSimpleMode()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
@@ -68,7 +67,7 @@ namespace LuxaforSharp.Tests
             fakeUnderlyingDevice.AssertMessagesReceived("00:01:05:C8:14:2A:00:00:00");
         }
 
-        [TestMethod]
+        [Fact]
         public void SetColor_ToSingleLed_WithFade_UsesFadingMode()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
@@ -82,7 +81,7 @@ namespace LuxaforSharp.Tests
             fakeUnderlyingDevice.AssertMessagesReceived("00:02:05:C8:14:2A:40:00:00");
         }
 
-        [TestMethod]
+        [Fact]
         public void SetColorThroughPort_ToAllLeds_SimilarResult()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
@@ -97,7 +96,7 @@ namespace LuxaforSharp.Tests
             fakeUnderlyingDevice.AssertBothMessagesAreEqual();
         }
 
-        [TestMethod]
+        [Fact]
         public void SetColorThroughPort_ToFrontsidePanel_SimilarResult()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
@@ -112,7 +111,7 @@ namespace LuxaforSharp.Tests
             fakeUnderlyingDevice.AssertBothMessagesAreEqual();
         }
 
-        [TestMethod]
+        [Fact]
         public void SetColorThroughPort_ToBacksidePanel_SimilarResult()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
@@ -127,7 +126,7 @@ namespace LuxaforSharp.Tests
             fakeUnderlyingDevice.AssertBothMessagesAreEqual();
         }
 
-        [TestMethod]
+        [Fact]
         public void SetColorThroughPort_ToSingleLed_SimilarResult()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
@@ -142,7 +141,7 @@ namespace LuxaforSharp.Tests
             fakeUnderlyingDevice.AssertBothMessagesAreEqual();
         }
 
-        [TestMethod]
+        [Fact]
         public void Blink_ToFrontSide_WithoutRepeat_LastByteIsEmpty()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
@@ -156,7 +155,7 @@ namespace LuxaforSharp.Tests
             fakeUnderlyingDevice.AssertMessagesReceived("00:03:41:D0:20:20:40:00:00");
         }
 
-        [TestMethod]
+        [Fact]
         public void Blink_ToFrontSide_WithRepeat_LastByteIsNotEmpty()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
@@ -170,7 +169,7 @@ namespace LuxaforSharp.Tests
             fakeUnderlyingDevice.AssertMessagesReceived("00:03:41:D0:20:20:40:00:03");
         }
 
-        [TestMethod]
+        [Fact]
         public void Wave()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
@@ -184,7 +183,7 @@ namespace LuxaforSharp.Tests
             fakeUnderlyingDevice.AssertMessagesReceived("00:04:03:CC:CC:20:00:02:05");
         }
 
-        [TestMethod]
+        [Fact]
         public void CarryOutPattern()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();

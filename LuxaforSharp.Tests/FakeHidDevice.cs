@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HidLibrary;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace LuxaforSharp.Tests
 {
@@ -53,12 +53,12 @@ namespace LuxaforSharp.Tests
 
         public void AssertMessagesReceived(params string[] messages)
         {
-            Assert.AreEqual(messages.Length, this.ReceivedCommands.Count);
+            Assert.Equal(messages.Length, this.ReceivedCommands.Count);
 
             for (int index = 0; index < messages.Length; index++)
             {
                 var byteMessage = ConvertToByteArray(messages[index]);
-                CollectionAssert.AreEqual(byteMessage, this.ReceivedCommands[index]);
+                Assert.Equal(byteMessage, this.ReceivedCommands[index]);
             }
 
         }
@@ -73,8 +73,8 @@ namespace LuxaforSharp.Tests
 
         internal void AssertBothMessagesAreEqual()
         {
-            Assert.AreEqual(2, this.ReceivedCommands.Count);
-            CollectionAssert.AreEqual(this.ReceivedCommands[0], this.ReceivedCommands[1]);
+            Assert.Equal(2, this.ReceivedCommands.Count);
+            Assert.Equal(this.ReceivedCommands[0], this.ReceivedCommands[1]);
         }
 
         #region Unimplemented methods
@@ -114,7 +114,9 @@ namespace LuxaforSharp.Tests
             get { throw new NotImplementedException(); }
         }
 
+#pragma warning disable 67
         public event InsertedEventHandler Inserted;
+#pragma warning restore 67
 
         public bool IsConnected
         {
@@ -218,7 +220,9 @@ namespace LuxaforSharp.Tests
             throw new NotImplementedException();
         }
 
+#pragma warning disable 67
         public event RemovedEventHandler Removed;
+#pragma warning restore 67
 
         public bool WriteFeatureData(byte[] data)
         {
