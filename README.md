@@ -2,6 +2,10 @@
 
 A .Net library providing a simple API to control Luxafor devices
 
+[![Nuget](http://img.shields.io/nuget/v/LuxaforSharp.svg?style=flat)](http://www.nuget.org/packages/LuxaforSharp/) 
+[![Nuget downloads](http://img.shields.io/nuget/dt/LuxaforSharp.svg?style=flat)](http://www.nuget.org/packages/LuxaforSharp/)
+[![Build Status](https://travis-ci.org/Duncan-Idaho/LuxaforSharp.svg?branch=master)](https://travis-ci.org/Duncan-Idaho/LuxaforSharp)
+
 ## About Luxafor
 
 Luxafor is an LED indicator that connects to your computer through a USB port 
