@@ -67,6 +67,7 @@
     <Compile Include="WaveType.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="LuxaforSharp.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
