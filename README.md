@@ -28,6 +28,8 @@ plug Luxafor to your own application.
 
 LuxaforSharp is available as a nuget.
 
+See: http://www.nuget.org/packages/HidLibrary/
+
 ## Documentation through exemples
 
 ### Getting the first device among those accessibles
