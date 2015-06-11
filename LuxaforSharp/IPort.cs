@@ -30,6 +30,6 @@ namespace LuxaforSharp
         /// <param name="repeatCount">Number of time the blink should be repeated</param>
         /// <param name="timeout">Time, in milliseconds, after which the application should stop waiting for the acknowledgment of this message</param>
         /// <returns>Task representing the operation. Result is true if the message has been acknowledged, false otherwise</returns>
-        Task<bool> Flash(Color color, byte speed, byte repeatCount = 0, int timeout = 0);
+        Task<bool> Blink(Color color, byte speed, byte repeatCount = 0, int timeout = 0);
     }
 }

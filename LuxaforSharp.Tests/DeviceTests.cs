@@ -143,28 +143,28 @@ namespace LuxaforSharp.Tests
         }
 
         [TestMethod]
-        public void FlashColor_ToFrontSide_WithoutRepeat_LastByteIsEmpty()
+        public void Blink_ToFrontSide_WithoutRepeat_LastByteIsEmpty()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
 
             using (var device = new Device(fakeUnderlyingDevice))
             {
                 var color = new Color(0xD0, 0x20, 0x20);
-                device.Flash(LedTarget.AllFrontSide, color, 64).Wait();
+                device.Blink(LedTarget.AllFrontSide, color, 64).Wait();
             }
 
             fakeUnderlyingDevice.AssertMessagesReceived("00:03:41:D0:20:20:40:00:00");
         }
 
         [TestMethod]
-        public void FlashColor_ToFrontSide_WithRepeat_LastByteIsNotEmpty()
+        public void Blink_ToFrontSide_WithRepeat_LastByteIsNotEmpty()
         {
             var fakeUnderlyingDevice = new FakeHidDevice();
 
             using (var device = new Device(fakeUnderlyingDevice))
             {
                 var color = new Color(0xD0, 0x20, 0x20);
-                device.Flash(LedTarget.AllFrontSide, color, 64, 3).Wait();
+                device.Blink(LedTarget.AllFrontSide, color, 64, 3).Wait();
             }
 
             fakeUnderlyingDevice.AssertMessagesReceived("00:03:41:D0:20:20:40:00:03");

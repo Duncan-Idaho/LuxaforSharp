@@ -46,7 +46,7 @@
     <Compile Include="Commands\Abstractions\ColoredCommand.cs" />
     <Compile Include="Commands\Abstractions\TargettedCommand.cs" />
     <Compile Include="Commands\FadeToCommand.cs" />
-    <Compile Include="Commands\FlashCommand.cs" />
+    <Compile Include="Commands\BlinkCommand.cs" />
     <Compile Include="Commands\JumpToCommand.cs" />
     <Compile Include="Commands\PatternCommand.cs" />
     <Compile Include="Commands\WaveCommand.cs" />
