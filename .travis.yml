@@ -2,4 +2,4 @@ language: csharp
 solution: LuxaforSharp.sln
 script:
   - xbuild /p:Configuration=Release LuxaforSharp.sln
-  - mono ./packages/xunit.runners.*/tools/xunit.console.exe ./LuxaforSharp.Tests/bin/Release/LuxaforSharp.Tests.dll
+  - mono ./packages/xunit.runner.console.*/tools/xunit.console.exe ./LuxaforSharp.Tests/bin/Release/LuxaforSharp.Tests.dll
