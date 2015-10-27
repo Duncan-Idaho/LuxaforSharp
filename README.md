@@ -35,6 +35,7 @@ See: http://www.nuget.org/packages/HidLibrary/
 ### Getting the first device among those accessibles
 ```c#
 IDeviceList list = new DeviceList();
+list.Scan();
 IDevice device = list.First();
 ```
 
