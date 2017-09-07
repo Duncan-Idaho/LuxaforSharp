@@ -30,9 +30,9 @@ LuxaforSharp is available as a nuget.
 
 See: http://www.nuget.org/packages/HidLibrary/
 
-## Documentation through exemples
+## Documentation through examples
 
-### Getting the first device among those accessibles
+### Getting the first device among those accessible
 ```c#
 IDeviceList list = new DeviceList();
 list.Scan();
@@ -46,7 +46,7 @@ device.SetColor(LedTarget.AllFrontSide, new Color(0, 255, 0), 15); // Fade front
 device.SetColor(LedTarget.OfIndex(2), new Color(255, 0, 0), 15); // Fade 2nd LED to red (middle frontside led)
 ```
 
-### Alternative way of acessing the device
+### Alternative way of accessing the device
 ```c#
 IPort allLeds = device.AllLeds;
 allLeds.SetColor(new Color(0, 0, 255)); // Immediatly switches all leds to green
@@ -65,7 +65,7 @@ device.Wave(WaveType.OverlappingLong, new Color(255, 0, 255), 5, 3); // Send a m
 device.CarryOutPattern(PatternType.Police, 5); // Repeat 5 times the "Police" pattern
 ```
 
-### Disposing the device
+### Disposing of the device
 ```c#
 device.Dispose();
 ```
